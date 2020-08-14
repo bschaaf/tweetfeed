@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+        mongodb:
+                image: "bschaaf/mongodb:0.1"
+                ports:
+                    - "27017:27017"
+                volumes:
+                    - "mongodata:/data/db"
+                command: ["--bind_ip_all"]
+        app:
+                image: "bschaaf/exercise:0.1"
+                network_mode: host
+                depends_on:
+                    - mongodb
+                volumes:
+                    - ".:/opt/out"
+volumes: 
+        mongodata: {}
+
